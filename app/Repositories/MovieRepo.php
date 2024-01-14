@@ -30,7 +30,6 @@ class MovieRepo
     public function saveMovie($value)
     {
 
-
         $genre = $this->genreRepository->save($value);
         $crew = $this->crewRepository->save($value);
         $movie = new Movie();
