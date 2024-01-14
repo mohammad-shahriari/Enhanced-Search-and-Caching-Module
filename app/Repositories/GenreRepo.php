@@ -4,13 +4,15 @@ namespace App\Repositories;
 
 use App\Models\Crew;
 use App\Models\Genre;
+use Illuminate\Support\Facades\Cache;
 
 class GenreRepo
 {
 
     public function getGenresAll()
     {
-        return Genre::all();
+        Cache::store('redis')->put('all_genres_data', Genre::all(), 800);
+        return  Cache::store('redis')->get('all_genres_data');
     }
 
     public function save($value)

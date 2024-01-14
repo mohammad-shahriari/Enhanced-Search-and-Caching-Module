@@ -3,6 +3,8 @@
 namespace App\Repositories;
 
 use App\Models\Crew;
+use App\Models\Movie;
+use Illuminate\Support\Facades\Cache;
 
 class CrewRepo
 {
@@ -10,7 +12,9 @@ class CrewRepo
 
     public function getCrewsAll()
     {
-        return Crew::all();
+        Cache::store('redis')->put('all_crews_data', Crew::all(), 700);
+        return  Cache::store('redis')->get('all_crews_data');
+
     }
 
     public function save($value)

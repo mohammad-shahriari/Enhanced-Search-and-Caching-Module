@@ -7,6 +7,7 @@ use App\Models\Genre;
 use App\Models\Movie;
 use App\Models\MovieCrew;
 use App\Services\ResponseBuilderService;
+use Illuminate\Support\Facades\Cache;
 use function PHPUnit\Framework\throwException;
 
 class MovieRepo
@@ -24,7 +25,8 @@ class MovieRepo
 
     public function getMoviesAll()
     {
-        return Movie::all();
+        Cache::store('redis')->put('all_movies_data', Movie::all(), 500);
+        return  Cache::store('redis')->get('all_movies_data');
     }
 
     public function saveMovie($value)
