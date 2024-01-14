@@ -33,7 +33,7 @@ class CrewController extends Controller
 
         $validate_data = Validator::make($request->all(), [
 
-            'crew_name' => ['required', 'string', 'unique:crews,name'],
+            'crew_name' => ['required', 'string',],
             'family' => ['required', 'string'],
             'role' => ['required', 'string'],
             'birthdate' => ['required'],

@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'movie'], function () {
     Route::get('/index', [\App\Http\Controllers\MovieController::class,'index']);
     Route::post('/create', [\App\Http\Controllers\MovieController::class,'store']);
-    Route::put('/update/{id}', [\App\Http\Controllers\MovieController::class,'update']);
+    Route::put('/update/{id}', [\App\Http\Controllers\MovieController::class,'update'])->name('movie.update');
     Route::delete('/delete/{id}', [\App\Http\Controllers\MovieController::class,'destroy']);
 });
 

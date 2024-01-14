@@ -54,15 +54,14 @@ class MovieRepo
             ->first();
       if ($existMovie){
           Genre::query()->where('id',$existMovie->genre_id)->update([
-              'name'=> $value->query('g
-              enre_name')
+              'name'=> $value->genre_name
           ]);
 
           Crew::query()->where('id',$existMovie->crew_id)->update([
-              'name'=>$value->query('crew_name'),
-              'family'=>$value->query('family'),
-              'role'=>$value->query('role'),
-              'birthdate'=>$value->query('birthdate'),
+              'name'=>$value->crew_name,
+              'family'=>$value->family,
+              'role'=>$value->role,
+              'birthdate'=>$value->birthdate,
           ]);
       }
 
