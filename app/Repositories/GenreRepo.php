@@ -25,7 +25,7 @@ class GenreRepo
     public function updateGenre($genreId,$value)
     {
         return Genre::query()->where('id',$genreId)->update([
-            'name'=>$value->name,
+            'name'=>$value->genre_name,
         ]);
     }
 

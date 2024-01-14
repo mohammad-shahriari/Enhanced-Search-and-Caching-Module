@@ -57,10 +57,10 @@ class GenreController extends Controller
     {
 
         $validate_data = Validator::make($request->all(), [
-            'name' => ['required', 'string'],
+            'genre_name' => ['required', 'string'],
 
         ], [
-            'name.required' => 'لطفا عنوان ژانر را وارد کنید',
+            'genre_name.required' => 'لطفا عنوان ژانر را وارد کنید',
 
         ]);
         if ($validate_data->fails()) {

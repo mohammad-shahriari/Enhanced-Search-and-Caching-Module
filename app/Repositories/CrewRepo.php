@@ -28,7 +28,7 @@ class CrewRepo
     public function updateCrew($crewId,$value)
     {
         return Crew::query()->where('id',$crewId)->update([
-            'name'=>$value->name,
+            'name'=>$value->crew_name,
             'family'=>$value->family,
             'role'=>$value->role,
             'birthdate'=>$value->birthdate,
