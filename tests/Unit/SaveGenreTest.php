@@ -7,7 +7,7 @@ use Tests\TestCase;
 
 class SaveGenreTest extends TestCase
 {
-    use RefreshDatabase;
+//    use RefreshDatabase;
     /**
      * A basic unit test example.
      */

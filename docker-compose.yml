@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+    elastic:
+        image: docker.elastic.co/elasticsearch/elasticsearch:7.9.3
+        container_name: elastic
+        restart: unless-stopped
+        environment:
+            - node.name=elastic
+            - cluster.name=elastic-docker-cluster
+            - discovery.type=single-node
+            - bootstrap.memory_lock=true
+            - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+        ulimits:
+            memlock:
+                soft: -1
+                hard: -1
+        volumes:
+            - laravelelastic:/usr/share/elasticsearch/data
+        ports:
+            - "${FORWARD_ELASTIC_PORT:-9201}:9200"
+        networks:
+            - laravel
+
+
+networks:
+    laravel:
+        driver: bridge
+
+volumes:
+    laravelelastic:
+        driver: local

@@ -14,15 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //
-//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
+
 
 Route::group(['prefix' => 'movie'], function () {
     Route::get('/index', [\App\Http\Controllers\MovieController::class,'index']);
     Route::post('/create', [\App\Http\Controllers\MovieController::class,'store']);
     Route::put('/update/{id}', [\App\Http\Controllers\MovieController::class,'update'])->name('movie.update');
     Route::delete('/delete/{id}', [\App\Http\Controllers\MovieController::class,'destroy']);
+    Route::get('/search', [\App\Http\Controllers\MovieController::class,'search']);
 });
 
 

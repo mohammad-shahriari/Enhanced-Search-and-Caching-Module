@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Movie;
 use App\Repositories\MovieRepo;
 use App\Services\ResponseBuilderService;
+use Elastic\Elasticsearch\ClientBuilder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -127,4 +128,28 @@ class MovieController extends Controller
     return ResponseBuilderService::sendCatchError($exception);
 }
     }
+
+    public function search(Request $request)
+    {
+        $validate_data = Validator::make($request->all(), [
+            'search' => ['required', 'string'],
+
+        ], [
+            'search.required' => 'لطفا کلمه کلیدی را وارد کنید',
+
+        ]);
+        if ($validate_data->fails()) {
+            $this->errors = $validate_data->errors()->toArray();
+            return ResponseBuilderService::sendValidationError($this->errors);
+        }
+
+        try {
+            $search = $request->query('search');
+            $result = Movie::search($search)->get();
+            return ResponseBuilderService::sendSuccess($result);
+        } catch (\Exception $exception) {
+            return ResponseBuilderService::sendCatchError($exception);
+        }
+    }
+
 }
